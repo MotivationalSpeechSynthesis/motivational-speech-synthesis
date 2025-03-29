@@ -33,11 +33,26 @@ from fam.llm.utils import (
 )
 
 class MotivationalTTSConfig(BaseModel):
-    seed: Optional[int] = Field(None, description="Optional seed for inference. If not provided, a random seed will be generated.")
-    output_dir: str = Field("motivational-speech", description="Directory for intermediate outputs.")
-    device: str = Field("cuda:0", description="Computation device.")
-    dtype: str = Field("float16", description="Precision to use ('float16' or 'bfloat16').")
-    debug: bool = Field(False, description="Enable debug logging.")
+    seed: Optional[int] = Field(
+        None,
+        description="Optional seed for inference. If not provided, a random seed will be generated."
+    )
+    intermediate_dir: str = Field(
+        "motivational-speech",
+        description="Directory for intermediate outputs."
+    )
+    device: str = Field(
+        "cuda:0",
+        description="Computation device."
+    )
+    dtype: str = Field(
+        "float16",
+        description="Precision to use ('float16' or 'bfloat16')."
+    )
+    debug: bool = Field(
+        False,
+        description="Enable debug logging."
+    )
     average_speaker_emb_dir: str = Field(
         "average-speaker-embeddings/average-speaker-embeddings_400",
         description="Directory containing average speaker embeddings."
@@ -54,6 +69,7 @@ class MotivationalTTSModel:
 
         # Setup logging for debugging if enabled
         self.logger = logging.getLogger(__name__)
+        logging.basicConfig(level=logging.DEBUG if self.config.debug else logging.INFO)
 
         # Use provided seed or generate a random one.
         if self.config.seed is None:
@@ -62,8 +78,8 @@ class MotivationalTTSModel:
         else:
             self.logger.debug(f"Using provided seed: {self.config.seed}")
 
-        # Create the output directory for any intermediate files if needed.
-        os.makedirs(self.config.output_dir, exist_ok=True)
+        # Create the intermediate directory for any temporary files if needed.
+        os.makedirs(self.config.intermediate_dir, exist_ok=True)
 
         # Get the default dtype from the library (usually "float16" or "bfloat16")
         self.dtype = get_default_dtype()
@@ -85,7 +101,7 @@ class MotivationalTTSModel:
             dtype=self.dtype,
             compile=False,
             init_from="resume",
-            output_dir=self.config.output_dir,
+            output_dir=self.config.intermediate_dir,
         )
 
         self.logger.debug("Initializing second stage adapter...")
@@ -190,18 +206,39 @@ class MotivationalTTSModel:
             raise e
 
 if __name__ == "__main__":
-    # Create configuration with optional seed (None for random) and debugging enabled if needed
-    config = MotivationalTTSConfig(seed=None, debug=True)
-    
-    # Instantiate the model
-    tts_model = MotivationalTTSModel(config)
-    
-    # Synthesize audio for a given prompt and motivational factor (audio is returned in memory)
-    audio, sample_rate = tts_model.synthesize("No goal is too far away to be reached.", motivational_factor=1.0)
-    print(f"Audio synthesized with sample rate: {sample_rate}")
-    
-    # Save the generated audio to a file
-    import soundfile as sf
-    output_filename = "generated_audio.wav"
-    sf.write(output_filename, audio, sample_rate)
-    print(f"Audio saved to {output_filename}")
+    # Import Typer only when running as a script
+    import typer
+
+    app = typer.Typer()
+
+    @app.command()
+    def run(
+        prompt: str = typer.Argument(..., help="The text to be synthesized."),
+        motivational_factor: float = typer.Option(0.0, help="A value between 0 and 1 representing the motivational intensity."),
+        seed: Optional[int] = typer.Option(None, help="Optional seed for inference. If not provided, a random seed will be generated."),
+        intermediate_dir: str = typer.Option("motivational-speech", help="Directory for intermediate outputs."),
+        output_name: str = typer.Option("generated_audio.wav", help="Name of the output audio file."),
+        device: str = typer.Option("cuda:0", help="Computation device."),
+        dtype: str = typer.Option("float16", help="Precision to use ('float16' or 'bfloat16')."),
+        debug: bool = typer.Option(False, help="Enable debug logging."),
+        average_speaker_emb_dir: str = typer.Option("average-speaker-embeddings/average-speaker-embeddings_400", help="Directory containing average speaker embeddings.")
+    ):
+        """
+        Synthesize motivational speech audio from a text prompt.
+        """
+        config = MotivationalTTSConfig(
+            seed=seed,
+            intermediate_dir=intermediate_dir,
+            device=device,
+            dtype=dtype,
+            debug=debug,
+            average_speaker_emb_dir=average_speaker_emb_dir,
+        )
+        tts_model = MotivationalTTSModel(config)
+        audio, sample_rate = tts_model.synthesize(prompt, motivational_factor=motivational_factor)
+
+        import soundfile as sf
+        sf.write(output_name, audio, sample_rate)
+        typer.echo(f"Audio saved to {output_name} with sample rate: {sample_rate}")
+
+    app()
