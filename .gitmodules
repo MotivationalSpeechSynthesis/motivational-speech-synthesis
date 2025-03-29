@@ -1,0 +1,3 @@
+[submodule "emoknob"]
+	path = emoknob
+	url = git@github.com:tonychenxyz/emoknob.git
