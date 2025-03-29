@@ -51,7 +51,7 @@ uv run motivationalTTS.py "Every journey begins with a single step." \
     --device "cuda:0" \
     --dtype "float16" \
     --debug \
-    --average-speaker-emb-dir "average_speaker_embeddings/average-speaker-embeddings_400"
+    --average-speaker-emb-dir "average-speaker-embeddings/average-speaker-embeddings_400"
 ```
 
 Note: Each standalone script execution recompiles the model. For repeated experiments and faster iteration, use the provided Jupyter notebook.

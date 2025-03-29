@@ -152,6 +152,7 @@ class MotivationalTTSModel:
             formatted_factor = f"{float(round(motivational_factor / 0.05) * 0.05):.2f}"
 
             avg_speaker_emb_file = Path(self.config.average_speaker_emb_dir) / f"motivational-factor-{formatted_factor}.pt"
+            self.logger.debug(f"Resolved average speaker embedding file path: {avg_speaker_emb_file.resolve()}")
             if not avg_speaker_emb_file.exists():
                 raise FileNotFoundError(f"Average speaker embedding file not found: {avg_speaker_emb_file}")
 
