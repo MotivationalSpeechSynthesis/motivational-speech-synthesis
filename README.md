@@ -1,6 +1,6 @@
 # Motivational Speech Synthesis
 
-Generate motivational speech audio from text inputs with customizable parameters to enhance the motivational tone.
+Synthesize motivational speech from text with a customizable motivational factor to control motivational prosody.
 
 ## Requirements
 
