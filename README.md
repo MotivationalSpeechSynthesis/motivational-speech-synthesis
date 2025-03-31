@@ -2,27 +2,39 @@
 
 Synthesize motivational speech from text with a customizable motivational factor to control motivational prosody.
 
+| [Preliminary Paper](https://motivationalspeechsynthesis.github.io/motivational-speech-synthesis.github.io/assets/paper.pdf) | [Project Page](https://motivationalspeechsynthesis.github.io/motivational-speech-synthesis.github.io/) | [Colab Demo](https://colab.research.google.com/github/MotivationalSpeechSynthesis/motivational-speech-synthesis/blob/main/google_colab.ipynb) | [Dataset](TODO) |
+
+
+
 ## Requirements
 
-- Python 3.9
-- Linux OS recommended (Windows support expected, macOS currently unsupported)
+- Linux OS recommended (Windows support expected but not tested, macOS currently unsupported)
 
-## Installation
+## Installation and Running
 
-This project utilizes `uv` for package management and virtual environment handling.
+Note: Each standalone script execution recompiles the model. For repeated experiments and faster iteration, use the provided Jupyter [notebook](https://github.com/MotivationalSpeechSynthesis/motivational-speech-synthesis/blob/main/inference_example.ipynb).
 
-### Using uv (Recommended)
+### Using uv
 
-Create and activate the virtual environment:
+Run script
+
+```bash
+uv run motivationalTTS.py "Every journey begins with a single step."
+```
+
+Virtual env for jupyter-notebook:
 
 ```bash
 uv venv
-uv pip install -r requirements.txt
+```
+
+Start jupyter-notebook
+
+```bash
+uv run jupyter-notebook
 ```
 
 ### Using pip
-
-Alternatively, you can use `pip`:
 
 ```bash
 python -m venv env
@@ -30,12 +42,16 @@ source env/bin/activate
 pip install -r requirements.txt
 ```
 
-## Usage
-
-Run the synthesis script directly from the command line:
+Run script
 
 ```bash
-uv run motivationalTTS.py "Every journey begins with a single step."
+python motivationalTTS.py "Every journey begins with a single step."
+```
+
+Start jupyter-notebook
+
+```bash
+uv run jupyter-notebook
 ```
 
 ### Optional Parameters
@@ -54,20 +70,7 @@ uv run motivationalTTS.py "Every journey begins with a single step." \
     --average-speaker-emb-dir "average-speaker-embeddings/average-speaker-embeddings_400"
 ```
 
-Note: Each standalone script execution recompiles the model. For repeated experiments and faster iteration, use the provided Jupyter notebook.
+### Google Colab
 
-## Interactive Experimentation
+The model can also be run with following Google Colab [example](https://colab.research.google.com/github/MotivationalSpeechSynthesis/motivational-speech-synthesis/blob/main/google_colab.ipynb)
 
-For easier experimentation, run the provided Jupyter notebook:
-
-```bash
-uv run jupyter-notebook
-```
-
-or, using pip:
-
-```bash
-jupyter-notebook
-```
-
-You can also initiate the virtual environment setup directly by executing the first cell within the notebook itself.
