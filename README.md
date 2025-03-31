@@ -2,7 +2,7 @@
 
 Synthesize motivational speech from text with a customizable motivational factor to control motivational prosody.
 
-| [Preliminary Paper](https://motivationalspeechsynthesis.github.io/motivational-speech-synthesis.github.io/assets/paper.pdf) | [Project Page](https://motivationalspeechsynthesis.github.io/motivational-speech-synthesis.github.io/) | [Colab Demo](https://colab.research.google.com/github/MotivationalSpeechSynthesis/motivational-speech-synthesis/blob/main/google_colab.ipynb) | [Dataset](TODO) |
+| [Preliminary Paper](https://motivationalspeechsynthesis.github.io/motivational-speech-synthesis.github.io/assets/paper.pdf) | [Project Page](https://motivationalspeechsynthesis.github.io/motivational-speech-synthesis.github.io/) | [Colab Demo](https://colab.research.google.com/github/MotivationalSpeechSynthesis/motivational-speech-synthesis/blob/main/google_colab.ipynb) |
 
 ## Cloning
 Use `--recurse-submodules`flag to also clone submodules
