@@ -158,7 +158,7 @@ class MotivationalTTSModel:
 
             self.logger.debug(f"Loading average speaker embedding from {avg_speaker_emb_file}...")
             avg_speak_emb = torch.load(str(avg_speaker_emb_file))
-            avg_speak_emb = avg_speak_emb.unsqueeze(0).to(device=self.device)
+            avg_speak_emb = avg_speak_emb.unsqueeze(0).to(device=self.device, dtype=self.precision)
 
             self.logger.debug("Running first stage LLM...")
             tokens = main(
