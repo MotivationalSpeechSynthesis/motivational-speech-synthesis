@@ -54,7 +54,7 @@ class MotivationalTTSConfig(BaseModel):
         description="Enable debug logging."
     )
     average_speaker_emb_dir: str = Field(
-        "average-speaker-embeddings/average-speaker-embeddings_400",
+        "average-speaker-embeddings",
         description="Directory containing average speaker embeddings."
     )
 
@@ -222,7 +222,7 @@ if __name__ == "__main__":
         device: str = typer.Option("cuda:0", help="Computation device."),
         dtype: str = typer.Option("float16", help="Precision to use ('float16' or 'bfloat16')."),
         debug: bool = typer.Option(False, help="Enable debug logging."),
-        average_speaker_emb_dir: str = typer.Option("average-speaker-embeddings/average-speaker-embeddings_400", help="Directory containing average speaker embeddings.")
+        average_speaker_emb_dir: str = typer.Option("average-speaker-embeddings", help="Directory containing average speaker embeddings.")
     ):
         """
         Synthesize motivational speech audio from a text prompt.
