@@ -10,6 +10,14 @@ Use `--recurse-submodules`flag to also clone submodules
 git clone --recurse-submodules git@github.com:MotivationalSpeechSynthesis/motivational-speech-synthesis.git
 ```
 
+If using HTTPS rather than SSH for cloning 
+```bash
+git clone git@github.com:MotivationalSpeechSynthesis/motivational-speech-synthesis.git
+cd motivational-speech-synthesis
+git config submodule.emoknob.url https://github.com/tonychenxyz/emoknob.git
+git submodule update --init --recursive
+```
+
 ## Requirements
 
 - Linux OS recommended (Windows support expected but not tested, macOS currently unsupported)
