@@ -4,7 +4,11 @@ Synthesize motivational speech from text with a customizable motivational factor
 
 | [Preliminary Paper](https://motivationalspeechsynthesis.github.io/motivational-speech-synthesis.github.io/assets/paper.pdf) | [Project Page](https://motivationalspeechsynthesis.github.io/motivational-speech-synthesis.github.io/) | [Colab Demo](https://colab.research.google.com/github/MotivationalSpeechSynthesis/motivational-speech-synthesis/blob/main/google_colab.ipynb) | [Dataset](TODO) |
 
-
+## Cloning
+Use `--recurse-submodules`flag to also clone submodules
+```bash
+git clone --recurse-submodules git@github.com:MotivationalSpeechSynthesis/motivational-speech-synthesis.git
+```
 
 ## Requirements
 
