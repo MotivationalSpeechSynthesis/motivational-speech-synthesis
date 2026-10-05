@@ -26,13 +26,18 @@ git submodule update --init --recursive
 
 ## Requirements
 
-- Linux OS recommended (Windows support expected but not tested, macOS currently unsupported)
+- Linux with an NVIDIA GPU (on Windows use WSL2, macOS is not supported)
+- [uv](https://docs.astral.sh/uv/getting-started/installation/), which installs Python 3.11 and the locked dependencies
 
 ## Installation and Running
 
 Note: Each standalone script execution recompiles the model. For repeated experiments and faster iteration, use the provided Jupyter [notebook](https://github.com/MotivationalSpeechSynthesis/motivational-speech-synthesis/blob/main/inference_example.ipynb).
 
-### Using uv
+Install the dependencies into `.venv`
+
+```bash
+uv sync
+```
 
 Run script
 
@@ -40,36 +45,17 @@ Run script
 uv run motivationalTTS.py "Every journey begins with a single step."
 ```
 
-Virtual env for jupyter-notebook:
+Start Jupyter in the project environment
 
 ```bash
-uv venv
+uv run --with jupyter jupyter lab
 ```
 
-Start jupyter-notebook
+DeepFilterNet and spaCy 3.5.2 ship no wheels for Python versions newer than 3.11, so the project pins Python 3.11 in `.python-version` and uv installs it automatically. To use pip instead, export the locked versions and install them into a Python 3.11 virtual environment:
 
 ```bash
-uv run jupyter-notebook
-```
-
-### Using pip
-
-```bash
-python -m venv env
-source env/bin/activate
+uv export --no-hashes -o requirements.txt
 pip install -r requirements.txt
-```
-
-Run script
-
-```bash
-python motivationalTTS.py "Every journey begins with a single step."
-```
-
-Start jupyter-notebook
-
-```bash
-uv run jupyter-notebook
 ```
 
 ### Optional Parameters
@@ -91,4 +77,12 @@ uv run motivationalTTS.py "Every journey begins with a single step." \
 ### Google Colab
 
 The model can also be run with following Google Colab [example](https://colab.research.google.com/github/MotivationalSpeechSynthesis/motivational-speech-synthesis/blob/main/google_colab.ipynb)
+
+Colab's own Python is too new for the dependencies, so the notebook installs them with uv and runs the model in a background process. `MotivationalTTSWorker` (in `motivationalTTSWorker.py`) offers the same `synthesize()` call as `MotivationalTTSModel` and can be used from any Python version with NumPy, as long as uv is installed (the model itself still needs Linux and an NVIDIA GPU):
+
+```python
+from motivationalTTSWorker import MotivationalTTSWorker
+tts_model = MotivationalTTSWorker(seed=None, debug=False)
+audio, sample_rate = tts_model.synthesize("No goal is too far away to be reached.", motivational_factor=1.0)
+```
 
