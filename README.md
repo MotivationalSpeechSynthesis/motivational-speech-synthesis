@@ -4,7 +4,7 @@ Text-to-motivational-speech with adjustable *motivational factor* to control mot
 
 Artistic research deconstructing the performative excess of motivational western subcultures.
 
-[Published Paper](https://aaa.udk.digital/Motivational_Speech_Synthesis.pdf) | [Project Page](https://motivational-speech-synthesis.com) | [Colab Demo](https://colab.research.google.com/github/MotivationalSpeechSynthesis/motivational-speech-synthesis/blob/main/google_colab.ipynb) | [Installation View](https://luiskueffner.com/motivational-speech-synthesis)
+[Published Paper](https://aaa.udk.digital/article/art-6) | [Project Page](https://motivational-speech-synthesis.com) | [Colab Demo](https://colab.research.google.com/github/MotivationalSpeechSynthesis/motivational-speech-synthesis/blob/main/google_colab.ipynb) | [Installation View](https://luiskueffner.com/motivational-speech-synthesis)
 
 ---
 
