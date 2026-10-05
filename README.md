@@ -2,11 +2,11 @@
 
 Text-to-motivational-speech with adjustable *motivational factor* to control motivational prosody.
 
-[Preliminary Paper](https://motivational-speech-synthesis.com/assets/motivational-speech-synthesis.pdf) | [Project Page](https://motivational-speech-synthesis.com) | [Colab Demo](https://colab.research.google.com/github/MotivationalSpeechSynthesis/motivational-speech-synthesis/blob/main/google_colab.ipynb)
+[Published Paper](https://aaa.udk.digital/Motivational_Speech_Synthesis.pdf) | [Project Page](https://motivational-speech-synthesis.com) | [Colab Demo](https://colab.research.google.com/github/MotivationalSpeechSynthesis/motivational-speech-synthesis/blob/main/google_colab.ipynb) | [Installation View](https://luiskueffner.com/motivational-speech-synthesis)
 
 ---
 
-*Motivational speech* has emerged as a popular audiovisual phenomenon within Western subcultures, conveying strategies and principles for individual success through expressive, high-energy delivery. The presented paper artistically explores methods for synthesizing the distinctive prosodic patterns inherent to motivational speech, while critically examining its sociocultural foundations. Drawing on recent advances in emotion-controllable text-to-speech (TTS) systems and speech emotion recognition (SER), we employ deep learning models and frameworks to replicate and analyze motivational speech. Within our proposed architecture, we introduce a one-dimensional  *motivational factor*, enabling the control of motivational prosody according to intensity. Situated within broader discourses on self-optimization and meritocracy, *Motivational Speech Synthesis* contributes to the field of emotional speech synthesis, while also prompting reflection on the societal values mediated in such narratives.
+*Motivational speech* has emerged as a popular audiovisual phenomenon within Western subcultures, conveying strategies for individual success through expressive, high-energy delivery. This paper artistically explores methods for synthesizing its distinctive prosody while critically examining its sociocultural foundations. Drawing on recent advances in emotion-controllable text-to-speech (TTS) and speech emotion recognition (SER), we employ deep learning models to replicate and analyze motivational speech. Our architecture introduces a one-dimensional *motivational factor* as a representation of the false promise of social mobility through individual effort, while enabling intensity-based control of motivational prosody. Situated within discourses on self-optimization and meritocracy, *Motivational Speech Synthesis* contributes to emotional speech synthesis while prompting reflection on work ethic.
 </p>
 
 
@@ -77,12 +77,3 @@ uv run motivationalTTS.py "Every journey begins with a single step." \
 ### Google Colab
 
 The model can also be run with following Google Colab [example](https://colab.research.google.com/github/MotivationalSpeechSynthesis/motivational-speech-synthesis/blob/main/google_colab.ipynb)
-
-Colab's own Python is too new for the dependencies, so the notebook installs them with uv and runs the model in a background process. `MotivationalTTSWorker` (in `motivationalTTSWorker.py`) offers the same `synthesize()` call as `MotivationalTTSModel` and can be used from any Python version with NumPy, as long as uv is installed (the model itself still needs Linux and an NVIDIA GPU):
-
-```python
-from motivationalTTSWorker import MotivationalTTSWorker
-tts_model = MotivationalTTSWorker(seed=None, debug=False)
-audio, sample_rate = tts_model.synthesize("No goal is too far away to be reached.", motivational_factor=1.0)
-```
-
