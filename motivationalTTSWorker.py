@@ -42,8 +42,9 @@ class MotivationalTTSWorker:
 
         self.log_path = Path(LOG_FILE).resolve()
         script = Path(__file__).resolve()
-        # Settings meant for the host's Python must not leak into the worker's Python 3.11.
-        env = {k: v for k, v in os.environ.items() if k not in ("PYTHONPATH", "VIRTUAL_ENV")}
+        # Settings meant for the host's Python, like Jupyter's inline matplotlib backend, must not leak into
+        # the worker's Python 3.11.
+        env = {k: v for k, v in os.environ.items() if k not in ("PYTHONPATH", "VIRTUAL_ENV", "MPLBACKEND")}
         with open(self.log_path, "w") as log:
             self._process = subprocess.Popen(
                 [uv, "run", "--project", str(script.parent), "python", str(script), json.dumps(config)],
