@@ -2,11 +2,13 @@
 
 Text-to-motivational-speech with adjustable *motivational factor* to control motivational prosody.
 
-[Preliminary Paper](https://motivational-speech-synthesis.com/assets/motivational-speech-synthesis.pdf) | [Project Page](https://motivational-speech-synthesis.com) | [Colab Demo](https://colab.research.google.com/github/MotivationalSpeechSynthesis/motivational-speech-synthesis/blob/main/google_colab.ipynb)
+Artistic research deconstructing the performative excess of motivational western subcultures.
+
+[Published Paper](https://aaa.udk.digital/Motivational_Speech_Synthesis.pdf) | [Project Page](https://motivational-speech-synthesis.com) | [Colab Demo](https://colab.research.google.com/github/MotivationalSpeechSynthesis/motivational-speech-synthesis/blob/main/google_colab.ipynb) | [Installation View](https://luiskueffner.com/motivational-speech-synthesis)
 
 ---
 
-*Motivational speech* has emerged as a popular audiovisual phenomenon within Western subcultures, conveying strategies and principles for individual success through expressive, high-energy delivery. The presented paper artistically explores methods for synthesizing the distinctive prosodic patterns inherent to motivational speech, while critically examining its sociocultural foundations. Drawing on recent advances in emotion-controllable text-to-speech (TTS) systems and speech emotion recognition (SER), we employ deep learning models and frameworks to replicate and analyze motivational speech. Within our proposed architecture, we introduce a one-dimensional  *motivational factor*, enabling the control of motivational prosody according to intensity. Situated within broader discourses on self-optimization and meritocracy, *Motivational Speech Synthesis* contributes to the field of emotional speech synthesis, while also prompting reflection on the societal values mediated in such narratives.
+*Motivational speech* has emerged as a popular audiovisual phenomenon within Western subcultures, conveying strategies for individual success through expressive, high-energy delivery. This paper artistically explores methods for synthesizing its distinctive prosody while critically examining its sociocultural foundations. Drawing on recent advances in emotion-controllable text-to-speech (TTS) and speech emotion recognition (SER), we employ deep learning models to replicate and analyze motivational speech. Our architecture introduces a one-dimensional *motivational factor* as a representation of the false promise of social mobility through individual effort, while enabling intensity-based control of motivational prosody. Situated within discourses on self-optimization and meritocracy, *Motivational Speech Synthesis* contributes to emotional speech synthesis while prompting reflection on work ethic.
 </p>
 
 
@@ -26,13 +28,18 @@ git submodule update --init --recursive
 
 ## Requirements
 
-- Linux OS recommended (Windows support expected but not tested, macOS currently unsupported)
+- Linux with an NVIDIA GPU (on Windows use WSL2, macOS is not supported)
+- [uv](https://docs.astral.sh/uv/getting-started/installation/), which installs Python 3.11 and the locked dependencies
 
 ## Installation and Running
 
 Note: Each standalone script execution recompiles the model. For repeated experiments and faster iteration, use the provided Jupyter [notebook](https://github.com/MotivationalSpeechSynthesis/motivational-speech-synthesis/blob/main/inference_example.ipynb).
 
-### Using uv
+Install the dependencies into `.venv`
+
+```bash
+uv sync
+```
 
 Run script
 
@@ -40,36 +47,17 @@ Run script
 uv run motivationalTTS.py "Every journey begins with a single step."
 ```
 
-Virtual env for jupyter-notebook:
+Start Jupyter in the project environment
 
 ```bash
-uv venv
+uv run --with jupyter jupyter lab
 ```
 
-Start jupyter-notebook
+DeepFilterNet and spaCy 3.5.2 ship no wheels for Python versions newer than 3.11, so the project pins Python 3.11 in `.python-version` and uv installs it automatically. To use pip instead, export the locked versions and install them into a Python 3.11 virtual environment:
 
 ```bash
-uv run jupyter-notebook
-```
-
-### Using pip
-
-```bash
-python -m venv env
-source env/bin/activate
+uv export --no-hashes -o requirements.txt
 pip install -r requirements.txt
-```
-
-Run script
-
-```bash
-python motivationalTTS.py "Every journey begins with a single step."
-```
-
-Start jupyter-notebook
-
-```bash
-uv run jupyter-notebook
 ```
 
 ### Optional Parameters
@@ -91,4 +79,3 @@ uv run motivationalTTS.py "Every journey begins with a single step." \
 ### Google Colab
 
 The model can also be run with following Google Colab [example](https://colab.research.google.com/github/MotivationalSpeechSynthesis/motivational-speech-synthesis/blob/main/google_colab.ipynb)
-
